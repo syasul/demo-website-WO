@@ -1,0 +1,502 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* Amaryllis Wedding & Organizer - Romantic Light Theme */
+    --color-rose: #D4A5A5;
+    --color-rose-light: #E8C5C5;
+    --color-cream: #F5E6E0;
+    --color-gold: #C9A96E;
+    --color-gold-light: #DDBF8A;
+    --color-dark: #2D2D2D;
+    --color-warm-white: #FDF8F5;
+    --color-sage: #8FA88A;
+    --color-blush: #F0D0D0;
+
+    /* Fonts */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-utility: 'IBM Plex Mono', monospace;
+}
+
+/* ──────────────────────────────────────
+   Base Styles
+────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #FDF8F5;
+    color: #2D2D2D;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #2D2D2D;
+}
+
+.bg-white {
+    background-color: #FFFFFF !important;
+}
+
+/* Text selection */
+::selection {
+    background: rgba(212, 165, 165, 0.35);
+    color: #2D2D2D;
+}
+
+/* Custom scrollbar - rose gold */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #FDF8F5;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #D4A5A5, #C9A96E);
+    border-radius: 9999px;
+    border: 2px solid #FDF8F5;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #C48A8A, #B8945C);
+}
+
+/* Accessible focus rings */
+:focus-visible {
+    outline: 2px solid rgba(201, 169, 110, 0.7);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ──────────────────────────────────────
+   Glass Card Components - Rose Gold Theme
+────────────────────────────────────── */
+.glass-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(212, 165, 165, 0.15) !important;
+    box-shadow: 0 2px 16px rgba(212, 165, 165, 0.08) !important;
+    border-radius: 16px;
+    transition: all 0.3s ease !important;
+    color: #2D2D2D !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Premium hairline highlight on top edge */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.45), rgba(212, 165, 165, 0.45), transparent);
+    pointer-events: none;
+}
+
+.glass-card:hover {
+    border-color: rgba(212, 165, 165, 0.35) !important;
+    box-shadow: 0 12px 32px rgba(212, 165, 165, 0.16) !important;
+}
+
+.glass-card-gold {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(201, 169, 110, 0.15) !important;
+    box-shadow: 0 2px 16px rgba(201, 169, 110, 0.08) !important;
+    border-radius: 16px;
+    transition: all 0.3s ease !important;
+    color: #2D2D2D !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.6), transparent);
+    pointer-events: none;
+}
+
+.glass-card-gold:hover {
+    border-color: rgba(201, 169, 110, 0.35) !important;
+    box-shadow: 0 12px 32px rgba(201, 169, 110, 0.16) !important;
+}
+
+.glass-card-dark {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(212, 165, 165, 0.1) !important;
+    box-shadow: 0 2px 12px rgba(212, 165, 165, 0.05) !important;
+}
+
+/* ──────────────────────────────────────
+   Buttons
+────────────────────────────────────── */
+.glass-btn {
+    background: #FFFFFF !important;
+    border: 1px solid #E8C5C5 !important;
+    color: #2D2D2D !important;
+    transition: all 0.2s ease !important;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.glass-btn:hover {
+    background: #FDF8F5 !important;
+    border-color: #D4A5A5 !important;
+    color: #D4A5A5 !important;
+}
+
+.glass-btn-primary {
+    background: linear-gradient(135deg, #D4A5A5 0%, #C48A8A 100%) !important;
+    border: 1px solid #D4A5A5 !important;
+    color: #FFFFFF !important;
+    transition: all 0.25s ease !important;
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(212, 165, 165, 0.35);
+}
+
+.glass-btn-primary:hover {
+    background: linear-gradient(135deg, #C48A8A 0%, #B87A7A 100%) !important;
+    border-color: #C48A8A !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 8px 22px rgba(212, 165, 165, 0.45);
+    transform: translateY(-1px);
+}
+
+.glass-btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(212, 165, 165, 0.35);
+}
+
+.glass-btn-primary * {
+    color: #FFFFFF !important;
+}
+
+/* ──────────────────────────────────────
+   Inputs & Form Elements
+────────────────────────────────────── */
+.glass-input {
+    background: #FFFFFF !important;
+    border: 1px solid #E8C5C5 !important;
+    color: #2D2D2D !important;
+    border-radius: 12px !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    width: 100%;
+}
+
+.glass-input:focus {
+    outline: none !important;
+    border-color: #D4A5A5 !important;
+    box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.15) !important;
+}
+
+.glass-input::placeholder {
+    color: rgba(45, 45, 45, 0.4) !important;
+}
+
+/* Checkbox Style */
+.glass-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #E8C5C5;
+    background: #FFFFFF;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+}
+
+.glass-checkbox:checked {
+    background: #D4A5A5;
+    border-color: #D4A5A5;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-width='2.5' d='M3 8l3.5 3.5 6-7'/%3e%3c/svg%3e");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Range input styling */
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    background: #F0D0D0;
+    height: 6px;
+    border-radius: 9999px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #D4A5A5;
+    border-radius: 50%;
+    margin-top: -7px;
+    transition: background-color 0.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+    background: #C9A96E;
+    box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.15);
+}
+input[type=range]::-moz-range-track {
+    background: #F0D0D0;
+    height: 6px;
+    border-radius: 9999px;
+}
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #D4A5A5;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+input[type=range]::-moz-range-thumb:hover {
+    background: #C9A96E;
+}
+
+/* ──────────────────────────────────────
+   Background Blob Disabler
+────────────────────────────────────── */
+.blob {
+    display: none !important;
+}
+
+/* ──────────────────────────────────────
+   Animations & Skeleton
+────────────────────────────────────── */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.animate-slide-down {
+    animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #F5E6E0 25%, #FDF8F5 50%, #F5E6E0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+/* ──────────────────────────────────────
+   Footer & Navigation
+────────────────────────────────────── */
+header nav a {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
+    font-size: 0.875rem !important;
+    color: #2D2D2D !important;
+}
+
+header nav a:hover,
+header nav a.text-rose {
+    color: #D4A5A5 !important;
+}
+
+footer.glass-card-dark {
+    background-color: #F5E6E0 !important;
+    border-top: 1px solid rgba(212, 165, 165, 0.2) !important;
+    box-shadow: none !important;
+}
+
+/* ──────────────────────────────────────
+   Subtle Floral Pattern Background
+────────────────────────────────────── */
+.floral-bg {
+    background-color: #FDF8F5;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(212, 165, 165, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(201, 169, 110, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(245, 230, 224, 0.5) 0%, transparent 50%);
+}
+
+/* ──────────────────────────────────────
+   Wedding-specific decorative elements
+────────────────────────────────────── */
+.wedding-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 165, 165, 0.4), rgba(201, 169, 110, 0.4), transparent);
+}
+
+.wedding-border {
+    border: 1px solid rgba(212, 165, 165, 0.2);
+    border-radius: 16px;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+    background: linear-gradient(120deg, #C9A96E 0%, #DDBF8A 45%, #C9A96E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Subtle shimmer sweep for primary buttons */
+.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+.btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+.btn-shimmer:hover::after {
+    left: 125%;
+}
+
+/* WhatsApp floating button pulse ring */
+.wa-pulse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: rgba(212, 165, 165, 0.4);
+    animation: waPulse 2.4s ease-out infinite;
+    z-index: -1;
+}
+@keyframes waPulse {
+    0%   { transform: scale(1); opacity: 0.6; }
+    70%  { transform: scale(1.55); opacity: 0; }
+    100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* Soft floating decorative sparkle */
+.hero-sparkle {
+    animation: heroSparkle 4s ease-in-out infinite;
+}
+@keyframes heroSparkle {
+    0%, 100% { opacity: 0.25; transform: translateY(0) scale(0.9); }
+    50%      { opacity: 0.8;  transform: translateY(-14px) scale(1.1); }
+}
+
+/* ──────────────────────────────────────
+   Premium Visual Styles & Nota Hidup Extras
+   ────────────────────────────────────── */
+.premium-frame {
+    position: relative;
+    padding: 12px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(212, 165, 165, 0.15);
+    border: 1px solid rgba(212, 165, 165, 0.15);
+}
+.premium-frame::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(201, 169, 110, 0.45);
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+/* Receipt Ticket Styles */
+.receipt-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(212, 165, 165, 0.2) !important;
+    box-shadow: 0 16px 36px rgba(212, 165, 165, 0.1) !important;
+    position: relative;
+    overflow: visible !important; /* Allow the punch notches on the sides to render outside bounds if needed */
+}
+
+/* Rounded ticket punch hole notches */
+.receipt-notch-left, .receipt-notch-right {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #FDF8F5; /* Matches the floral-bg color */
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.receipt-notch-left {
+    left: -10px;
+    border-right: 1px solid rgba(212, 165, 165, 0.2);
+}
+.receipt-notch-right {
+    right: -10px;
+    border-left: 1px solid rgba(212, 165, 165, 0.2);
+}
+
+/* Tear-here dashed line divider */
+.receipt-tear-line {
+    border-top: 2px dashed rgba(212, 165, 165, 0.35);
+    height: 0;
+    margin: 1.25rem 0;
+    position: relative;
+}
+
+/* Vintage ink rubber stamp styling */
+.rubber-stamp {
+    border: 3px double rgba(138, 110, 162, 0.55);
+    color: rgba(138, 110, 162, 0.55);
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 4px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 4px rgba(138, 110, 162, 0.05);
+}
