@@ -503,8 +503,8 @@ export const PackageDetails: React.FC = () => {
 
                                     {/* Tear line with notches extending to the card edges */}
                                     <div className="relative my-2 -mx-6 md:-mx-8 select-none pointer-events-none">
-                                        <div className="absolute left-0 w-5 h-5 bg-[#FDF8F5] rounded-full border-r border-rose/15 -translate-x-1/2 top-1/2 -translate-y-1/2"></div>
-                                        <div className="absolute right-0 w-5 h-5 bg-[#FDF8F5] rounded-full border-l border-rose/15 translate-x-1/2 top-1/2 -translate-y-1/2"></div>
+                                        <div className="absolute left-0 w-5 h-5 bg-warm-white rounded-full border-r border-rose/15 -translate-x-1/2 top-1/2 -translate-y-1/2"></div>
+                                        <div className="absolute right-0 w-5 h-5 bg-warm-white rounded-full border-l border-rose/15 translate-x-1/2 top-1/2 -translate-y-1/2"></div>
                                         <div className="receipt-tear-line mx-2"></div>
                                     </div>
 

@@ -123,10 +123,10 @@ export const DashboardPanel: React.FC<{ user: User }> = ({ user }) => {
                                 <YAxis tick={{ fill: '#6b7280', fontSize: 10, fontFamily: 'IBM Plex Mono' }} />
                                 <Tooltip wrapperStyle={{ fontFamily: 'Poppins', fontSize: 12 }} contentStyle={{ backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#1f2937' }} />
                                 <Legend wrapperStyle={{ fontSize: 11, color: '#374151' }} />
-                                <Line type="monotone" dataKey="web" stroke="#D4A5A5" strokeWidth={2} name="Web Calculator" />
+                                <Line type="monotone" dataKey="web" stroke="#1B4D3E" strokeWidth={2} name="Web Calculator" />
                                 <Line type="monotone" dataKey="whatsapp" stroke="#25D366" strokeWidth={2} name="WhatsApp CS" />
-                                <Line type="monotone" dataKey="manual" stroke="#C9A96E" strokeWidth={2} name="Manual Admin" />
-                                <Line type="monotone" dataKey="total" stroke="#2D2D2D" strokeWidth={3} name="Total Leads" />
+                                <Line type="monotone" dataKey="manual" stroke="#AD8A4E" strokeWidth={2} name="Manual Admin" />
+                                <Line type="monotone" dataKey="total" stroke="#1F2E22" strokeWidth={3} name="Total Leads" />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -146,8 +146,8 @@ export const DashboardPanel: React.FC<{ user: User }> = ({ user }) => {
                                 <YAxis tick={{ fill: '#6b7280', fontSize: 10, fontFamily: 'IBM Plex Mono' }} />
                                 <Tooltip wrapperStyle={{ fontFamily: 'Poppins', fontSize: 12 }} contentStyle={{ backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#1f2937' }} />
                                 <Legend wrapperStyle={{ fontSize: 11, color: '#374151' }} />
-                                <Bar dataKey="simulations" fill="#D4A5A5" name="Simulasi" />
-                                <Bar dataKey="deals" fill="#C9A96E" name="Deal Closing" />
+                                <Bar dataKey="simulations" fill="#1B4D3E" name="Simulasi" />
+                                <Bar dataKey="deals" fill="#AD8A4E" name="Deal Closing" />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

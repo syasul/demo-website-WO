@@ -4,16 +4,16 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    /* Amaryllis Wedding & Organizer - Romantic Light Theme */
-    --color-rose: #D4A5A5;
-    --color-rose-light: #E8C5C5;
-    --color-cream: #F5E6E0;
-    --color-gold: #C9A96E;
-    --color-gold-light: #DDBF8A;
-    --color-dark: #2D2D2D;
-    --color-warm-white: #FDF8F5;
-    --color-sage: #8FA88A;
-    --color-blush: #F0D0D0;
+    /* Amaryllis Wedding & Organizer - Garden Ledger Theme (Dark Green & Gold) */
+    --color-rose: #1B4D3E;
+    --color-rose-light: #2C5E4E;
+    --color-cream: #F5EFDF;
+    --color-gold: #AD8A4E;
+    --color-gold-light: #C5A26B;
+    --color-dark: #1F2E22;
+    --color-warm-white: #FAF8F2;
+    --color-sage: #56705C;
+    --color-blush: #E2ECE5;
 
     /* Fonts */
     --font-display: 'Playfair Display', serif;
@@ -29,15 +29,15 @@ html {
 }
 
 body {
-    background-color: #FDF8F5;
-    color: #2D2D2D;
+    background-color: var(--color-warm-white);
+    color: var(--color-dark);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #2D2D2D;
+    color: var(--color-dark);
 }
 
 .bg-white {
@@ -46,8 +46,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Text selection */
 ::selection {
-    background: rgba(212, 165, 165, 0.35);
-    color: #2D2D2D;
+    background: rgba(27, 77, 62, 0.35);
+    color: var(--color-dark);
 }
 
 /* Custom scrollbar - rose gold */
@@ -56,20 +56,20 @@ h1, h2, h3, h4, h5, h6 {
     height: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: #FDF8F5;
+    background: var(--color-warm-white);
 }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #D4A5A5, #C9A96E);
+    background: linear-gradient(180deg, var(--color-rose), var(--color-gold));
     border-radius: 9999px;
-    border: 2px solid #FDF8F5;
+    border: 2px solid var(--color-warm-white);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #C48A8A, #B8945C);
+    background: linear-gradient(180deg, var(--color-rose-light), var(--color-gold-light));
 }
 
 /* Accessible focus rings */
 :focus-visible {
-    outline: 2px solid rgba(201, 169, 110, 0.7);
+    outline: 2px solid rgba(173, 138, 78, 0.7);
     outline-offset: 2px;
     border-radius: 4px;
 }
@@ -79,11 +79,11 @@ h1, h2, h3, h4, h5, h6 {
 ────────────────────────────────────── */
 .glass-card {
     background: #FFFFFF !important;
-    border: 1px solid rgba(212, 165, 165, 0.15) !important;
-    box-shadow: 0 2px 16px rgba(212, 165, 165, 0.08) !important;
+    border: 1px solid rgba(27, 77, 62, 0.15) !important;
+    box-shadow: 0 2px 16px rgba(27, 77, 62, 0.08) !important;
     border-radius: 16px;
     transition: all 0.3s ease !important;
-    color: #2D2D2D !important;
+    color: var(--color-dark) !important;
     position: relative;
     overflow: hidden;
 }
@@ -96,22 +96,22 @@ h1, h2, h3, h4, h5, h6 {
     left: 12%;
     right: 12%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.45), rgba(212, 165, 165, 0.45), transparent);
+    background: linear-gradient(90deg, transparent, rgba(173, 138, 78, 0.45), rgba(27, 77, 62, 0.45), transparent);
     pointer-events: none;
 }
 
 .glass-card:hover {
-    border-color: rgba(212, 165, 165, 0.35) !important;
-    box-shadow: 0 12px 32px rgba(212, 165, 165, 0.16) !important;
+    border-color: rgba(27, 77, 62, 0.35) !important;
+    box-shadow: 0 12px 32px rgba(27, 77, 62, 0.16) !important;
 }
 
 .glass-card-gold {
     background: #FFFFFF !important;
-    border: 1px solid rgba(201, 169, 110, 0.15) !important;
-    box-shadow: 0 2px 16px rgba(201, 169, 110, 0.08) !important;
+    border: 1px solid rgba(173, 138, 78, 0.15) !important;
+    box-shadow: 0 2px 16px rgba(173, 138, 78, 0.08) !important;
     border-radius: 16px;
     transition: all 0.3s ease !important;
-    color: #2D2D2D !important;
+    color: var(--color-dark) !important;
     position: relative;
     overflow: hidden;
 }
@@ -123,19 +123,19 @@ h1, h2, h3, h4, h5, h6 {
     left: 12%;
     right: 12%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.6), transparent);
+    background: linear-gradient(90deg, transparent, rgba(173, 138, 78, 0.6), transparent);
     pointer-events: none;
 }
 
 .glass-card-gold:hover {
-    border-color: rgba(201, 169, 110, 0.35) !important;
-    box-shadow: 0 12px 32px rgba(201, 169, 110, 0.16) !important;
+    border-color: rgba(173, 138, 78, 0.35) !important;
+    box-shadow: 0 12px 32px rgba(173, 138, 78, 0.16) !important;
 }
 
 .glass-card-dark {
     background: rgba(255, 255, 255, 0.95) !important;
-    border-bottom: 1px solid rgba(212, 165, 165, 0.1) !important;
-    box-shadow: 0 2px 12px rgba(212, 165, 165, 0.05) !important;
+    border-bottom: 1px solid rgba(27, 77, 62, 0.1) !important;
+    box-shadow: 0 2px 12px rgba(27, 77, 62, 0.05) !important;
 }
 
 /* ──────────────────────────────────────
@@ -143,40 +143,40 @@ h1, h2, h3, h4, h5, h6 {
 ────────────────────────────────────── */
 .glass-btn {
     background: #FFFFFF !important;
-    border: 1px solid #E8C5C5 !important;
-    color: #2D2D2D !important;
+    border: 1px solid var(--color-rose-light) !important;
+    color: var(--color-dark) !important;
     transition: all 0.2s ease !important;
     border-radius: 12px;
     font-weight: 600;
 }
 
 .glass-btn:hover {
-    background: #FDF8F5 !important;
-    border-color: #D4A5A5 !important;
-    color: #D4A5A5 !important;
+    background: var(--color-warm-white) !important;
+    border-color: var(--color-rose) !important;
+    color: var(--color-rose) !important;
 }
 
 .glass-btn-primary {
-    background: linear-gradient(135deg, #D4A5A5 0%, #C48A8A 100%) !important;
-    border: 1px solid #D4A5A5 !important;
+    background: linear-gradient(135deg, var(--color-rose) 0%, var(--color-rose-light) 100%) !important;
+    border: 1px solid var(--color-rose) !important;
     color: #FFFFFF !important;
     transition: all 0.25s ease !important;
     border-radius: 12px;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(212, 165, 165, 0.35);
+    box-shadow: 0 4px 14px rgba(27, 77, 62, 0.35);
 }
 
 .glass-btn-primary:hover {
-    background: linear-gradient(135deg, #C48A8A 0%, #B87A7A 100%) !important;
-    border-color: #C48A8A !important;
+    background: linear-gradient(135deg, var(--color-rose-light) 0%, #204437 100%) !important;
+    border-color: var(--color-rose-light) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 8px 22px rgba(212, 165, 165, 0.45);
+    box-shadow: 0 8px 22px rgba(27, 77, 62, 0.45);
     transform: translateY(-1px);
 }
 
 .glass-btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(212, 165, 165, 0.35);
+    box-shadow: 0 2px 8px rgba(27, 77, 62, 0.35);
 }
 
 .glass-btn-primary * {
@@ -188,8 +188,8 @@ h1, h2, h3, h4, h5, h6 {
 ────────────────────────────────────── */
 .glass-input {
     background: #FFFFFF !important;
-    border: 1px solid #E8C5C5 !important;
-    color: #2D2D2D !important;
+    border: 1px solid var(--color-rose-light) !important;
+    color: var(--color-dark) !important;
     border-radius: 12px !important;
     transition: border-color 0.2s, box-shadow 0.2s !important;
     width: 100%;
@@ -197,8 +197,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .glass-input:focus {
     outline: none !important;
-    border-color: #D4A5A5 !important;
-    box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.15) !important;
+    border-color: var(--color-rose) !important;
+    box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.15) !important;
 }
 
 .glass-input::placeholder {
@@ -211,7 +211,7 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-appearance: none;
     width: 18px;
     height: 18px;
-    border: 1px solid #E8C5C5;
+    border: 1px solid var(--color-rose-light);
     background: #FFFFFF;
     border-radius: 4px;
     cursor: pointer;
@@ -220,8 +220,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-checkbox:checked {
-    background: #D4A5A5;
-    border-color: #D4A5A5;
+    background: var(--color-rose);
+    border-color: var(--color-rose);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-width='2.5' d='M3 8l3.5 3.5 6-7'/%3e%3c/svg%3e");
     background-size: contain;
     background-repeat: no-repeat;
@@ -236,7 +236,7 @@ input[type=range] {
     cursor: pointer;
 }
 input[type=range]::-webkit-slider-runnable-track {
-    background: #F0D0D0;
+    background: var(--color-blush);
     height: 6px;
     border-radius: 9999px;
 }
@@ -245,30 +245,30 @@ input[type=range]::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #D4A5A5;
+    background: var(--color-rose);
     border-radius: 50%;
     margin-top: -7px;
     transition: background-color 0.2s;
 }
 input[type=range]::-webkit-slider-thumb:hover {
-    background: #C9A96E;
-    box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.15);
+    background: var(--color-gold);
+    box-shadow: 0 0 0 6px rgba(173, 138, 78, 0.15);
 }
 input[type=range]::-moz-range-track {
-    background: #F0D0D0;
+    background: var(--color-blush);
     height: 6px;
     border-radius: 9999px;
 }
 input[type=range]::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    background: #D4A5A5;
+    background: var(--color-rose);
     border: none;
     border-radius: 50%;
     transition: background-color 0.2s;
 }
 input[type=range]::-moz-range-thumb:hover {
-    background: #C9A96E;
+    background: var(--color-gold);
 }
 
 /* ──────────────────────────────────────
@@ -323,7 +323,7 @@ input[type=range]::-moz-range-thumb:hover {
 }
 
 .skeleton {
-    background: linear-gradient(90deg, #F5E6E0 25%, #FDF8F5 50%, #F5E6E0 75%);
+    background: linear-gradient(90deg, var(--color-cream) 25%, var(--color-warm-white) 50%, var(--color-cream) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 8px;
@@ -331,23 +331,23 @@ input[type=range]::-moz-range-thumb:hover {
 
 /* ──────────────────────────────────────
    Footer & Navigation
-────────────────────────────────────── */
+   ────────────────────────────────────── */
 header nav a {
     font-family: 'Poppins', sans-serif !important;
     font-weight: 500 !important;
     letter-spacing: 0.02em !important;
     font-size: 0.875rem !important;
-    color: #2D2D2D !important;
+    color: var(--color-dark) !important;
 }
 
 header nav a:hover,
 header nav a.text-rose {
-    color: #D4A5A5 !important;
+    color: var(--color-rose) !important;
 }
 
 footer.glass-card-dark {
-    background-color: #F5E6E0 !important;
-    border-top: 1px solid rgba(212, 165, 165, 0.2) !important;
+    background-color: var(--color-cream) !important;
+    border-top: 1px solid rgba(27, 77, 62, 0.2) !important;
     box-shadow: none !important;
 }
 
@@ -355,11 +355,11 @@ footer.glass-card-dark {
    Subtle Floral Pattern Background
 ────────────────────────────────────── */
 .floral-bg {
-    background-color: #FDF8F5;
+    background-color: var(--color-warm-white);
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(212, 165, 165, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(201, 169, 110, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(245, 230, 224, 0.5) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(27, 77, 62, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(173, 138, 78, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(245, 239, 223, 0.5) 0%, transparent 50%);
 }
 
 /* ──────────────────────────────────────
@@ -367,17 +367,17 @@ footer.glass-card-dark {
 ────────────────────────────────────── */
 .wedding-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 165, 165, 0.4), rgba(201, 169, 110, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(27, 77, 62, 0.4), rgba(173, 138, 78, 0.4), transparent);
 }
 
 .wedding-border {
-    border: 1px solid rgba(212, 165, 165, 0.2);
+    border: 1px solid rgba(27, 77, 62, 0.2);
     border-radius: 16px;
 }
 
 /* Gold gradient text */
 .text-gradient-gold {
-    background: linear-gradient(120deg, #C9A96E 0%, #DDBF8A 45%, #C9A96E 100%);
+    background: linear-gradient(120deg, var(--color-gold) 0%, var(--color-gold-light) 45%, var(--color-gold) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -410,7 +410,7 @@ footer.glass-card-dark {
     position: absolute;
     inset: 0;
     border-radius: 9999px;
-    background: rgba(212, 165, 165, 0.4);
+    background: rgba(27, 77, 62, 0.4);
     animation: waPulse 2.4s ease-out infinite;
     z-index: -1;
 }
@@ -437,14 +437,14 @@ footer.glass-card-dark {
     padding: 12px;
     background: #FFFFFF;
     border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(212, 165, 165, 0.15);
-    border: 1px solid rgba(212, 165, 165, 0.15);
+    box-shadow: 0 20px 40px rgba(27, 77, 62, 0.15);
+    border: 1px solid rgba(27, 77, 62, 0.15);
 }
 .premium-frame::after {
     content: '';
     position: absolute;
     inset: 6px;
-    border: 1px solid rgba(201, 169, 110, 0.45);
+    border: 1px solid rgba(173, 138, 78, 0.45);
     border-radius: 18px;
     pointer-events: none;
 }
@@ -452,8 +452,8 @@ footer.glass-card-dark {
 /* Receipt Ticket Styles */
 .receipt-card {
     background: #FFFFFF !important;
-    border: 1px solid rgba(212, 165, 165, 0.2) !important;
-    box-shadow: 0 16px 36px rgba(212, 165, 165, 0.1) !important;
+    border: 1px solid rgba(27, 77, 62, 0.2) !important;
+    box-shadow: 0 16px 36px rgba(27, 77, 62, 0.1) !important;
     position: relative;
     overflow: visible !important; /* Allow the punch notches on the sides to render outside bounds if needed */
 }
@@ -463,7 +463,7 @@ footer.glass-card-dark {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #FDF8F5; /* Matches the floral-bg color */
+    background-color: var(--color-warm-white); /* Matches the floral-bg color */
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
@@ -471,16 +471,16 @@ footer.glass-card-dark {
 }
 .receipt-notch-left {
     left: -10px;
-    border-right: 1px solid rgba(212, 165, 165, 0.2);
+    border-right: 1px solid rgba(27, 77, 62, 0.2);
 }
 .receipt-notch-right {
     right: -10px;
-    border-left: 1px solid rgba(212, 165, 165, 0.2);
+    border-left: 1px solid rgba(27, 77, 62, 0.2);
 }
 
 /* Tear-here dashed line divider */
 .receipt-tear-line {
-    border-top: 2px dashed rgba(212, 165, 165, 0.35);
+    border-top: 2px dashed rgba(27, 77, 62, 0.35);
     height: 0;
     margin: 1.25rem 0;
     position: relative;

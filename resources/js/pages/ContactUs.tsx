@@ -100,7 +100,7 @@ export const ContactUs: React.FC = () => {
                                                 value={form.name}
                                                 onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                                                 placeholder="Nama lengkap Anda..."
-                                                className={`w-full bg-[#FDF8F5] border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 ${errors.name ? 'border-red-500/50' : 'border-rose/20'}`}
+                                                className={`w-full bg-warm-white border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 ${errors.name ? 'border-red-500/50' : 'border-rose/20'}`}
                                             />
                                             {errors.name && <p className="text-[9px] text-red-500 font-semibold">{errors.name}</p>}
                                         </div>
@@ -111,7 +111,7 @@ export const ContactUs: React.FC = () => {
                                                 value={form.phone}
                                                 onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                                                 placeholder="0812xxx..."
-                                                className={`w-full bg-[#FDF8F5] border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 ${errors.phone ? 'border-red-500/50' : 'border-rose/20'}`}
+                                                className={`w-full bg-warm-white border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 ${errors.phone ? 'border-red-500/50' : 'border-rose/20'}`}
                                             />
                                             {errors.phone && <p className="text-[9px] text-red-500 font-semibold">{errors.phone}</p>}
                                         </div>
@@ -124,7 +124,7 @@ export const ContactUs: React.FC = () => {
                                             value={form.email}
                                             onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                                             placeholder="email@contoh.com..."
-                                            className="w-full bg-[#FDF8F5] border border-rose/20 rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200"
+                                            className="w-full bg-warm-white border border-rose/20 rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200"
                                         />
                                     </div>
 
@@ -135,7 +135,7 @@ export const ContactUs: React.FC = () => {
                                             onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                                             rows={4}
                                             placeholder="Ceritakan kebutuhan pernikahan Anda..."
-                                            className={`w-full bg-[#FDF8F5] border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 resize-none ${errors.message ? 'border-red-500/50' : 'border-rose/20'}`}
+                                            className={`w-full bg-warm-white border rounded-xl px-3.5 py-2.5 text-sm text-dark placeholder-gray-400 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose focus:bg-white transition-all duration-200 resize-none ${errors.message ? 'border-red-500/50' : 'border-rose/20'}`}
                                         />
                                         {errors.message && <p className="text-[9px] text-red-500 font-semibold">{errors.message}</p>}
                                     </div>

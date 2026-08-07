@@ -165,7 +165,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             {/* Only the Home hero carries the pink background; other pages
                 let the floral-bg body show through seamlessly */}
-            <main className={`flex-grow pt-24 md:pt-28 relative z-10 ${isHome ? 'bg-[#F5E6E0]' : ''}`}>
+            <main className={`flex-grow pt-24 md:pt-28 relative z-10 ${isHome ? 'bg-cream' : ''}`}>
                 <PageTransition>{children}</PageTransition>
             </main>
 
@@ -175,8 +175,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 target="_blank"
                 rel="noreferrer"
                 className="wa-pulse fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full text-white shadow-2xl"
-                style={{ background: 'linear-gradient(135deg, #D4A5A5, #C9A96E)' }}
-                whileHover={{ scale: 1.1, boxShadow: '0 0 24px rgba(212,165,165,0.5)' }}
+                style={{ background: 'linear-gradient(135deg, var(--color-rose), var(--color-gold))' }}
+                whileHover={{ scale: 1.1, boxShadow: '0 0 24px rgba(27,77,62,0.5)' }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

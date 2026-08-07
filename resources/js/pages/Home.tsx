@@ -151,7 +151,7 @@ export const Home: React.FC = () => {
         <div className="overflow-x-hidden">
             {/* ───── HERO ───── */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-6 py-24 overflow-hidden"
-                style={{ background: '#F5E6E0' }}
+                style={{ background: 'var(--color-cream)' }}
             >
                 {/* Decorative circles */}
                 <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-rose/5 blur-3xl pointer-events-none" />
@@ -214,12 +214,12 @@ export const Home: React.FC = () => {
                     </div>
 
                     <div className="lg:col-span-5 relative pr-0 lg:pr-6 mt-10 lg:mt-0">
-                        <div className="anime-hero-img opacity-0 relative max-w-md mx-auto premium-frame">
+                        <div className="anime-hero-img opacity-0 relative max-w-md mx-auto">
                             <div className="absolute -inset-4 bg-gradient-to-br from-rose/15 to-gold/15 rounded-3xl blur-xl -z-10 animate-pulse-soft" />
                             <img
                                 src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800"
                                 alt="Wedding Decoration"
-                                className="relative w-full h-[320px] md:h-[400px] lg:h-[500px] object-cover rounded-xl border border-rose/10"
+                                className="relative w-full h-[320px] md:h-[400px] lg:h-[500px] object-cover rounded-2xl shadow-2xl"
                             />
                             {/* Floating rating badge */}
                             <div className="absolute -top-5 -right-3 md:-right-5 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-gold/30 animate-float rotate-3 hover:rotate-0 transition-transform duration-300">
@@ -254,7 +254,7 @@ export const Home: React.FC = () => {
                 </motion.div>
 
                 <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-                    style={{ background: 'linear-gradient(to top, #FDF8F5, transparent)' }} />
+                    style={{ background: 'linear-gradient(to top, var(--color-warm-white), transparent)' }} />
             </section>
 
             {/* ───── PROBLEMS ───── */}
@@ -552,7 +552,7 @@ export const Home: React.FC = () => {
 
             {/* ───── CTA ───── */}
             <section className="py-28 px-6 text-center relative overflow-hidden"
-                style={{ background: '#F5E6E0' }}
+                style={{ background: 'var(--color-cream)' }}
             >
                 {/* Decorative sparkles */}
                 <Sparkles size={18} className="hero-sparkle absolute top-16 left-[8%] text-gold/50 pointer-events-none hidden md:block" />
