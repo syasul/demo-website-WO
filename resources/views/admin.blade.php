@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LUXURY Wedding Admin — Panel Manajemen Pernikahan</title>
-    <link rel="icon" type="image/png" href="/favicon.png?v=3">
-    <link rel="shortcut icon" href="/favicon.png?v=3">
+    <link rel="icon" type="image/png" href="/favicon.png?v=4">
+    <link rel="shortcut icon" href="/favicon.png?v=4">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
