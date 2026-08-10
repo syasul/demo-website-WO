@@ -130,7 +130,29 @@ export const SettingsPanel: React.FC = () => {
                         value={settings.notification_emails || ''}
                         onChange={(e) => handleSettingChange('notification_emails', e.target.value)}
                         className="w-full p-2.5 bg-rose/5 border border-rose/20 focus:outline-none focus:border-gold font-utility"
-                        placeholder="contoh: admin@amarylliswedding.com, operasional@amarylliswedding.com"
+                        placeholder="contoh: admin@luxurywo.com, operasional@luxurywo.com"
+                    />
+                </div>
+
+                <div className="space-y-1">
+                    <label className="text-[9px] uppercase font-bold text-dark/60 block">SK Charge Kuota Tamu Melebihi Batas *</label>
+                    <textarea 
+                        value={settings.sk_charge_quota || ''}
+                        onChange={(e) => handleSettingChange('sk_charge_quota', e.target.value)}
+                        required
+                        rows={3}
+                        className="w-full p-3 bg-rose/5 border border-rose/20 focus:outline-none focus:border-gold font-sans text-xs leading-relaxed"
+                    />
+                </div>
+
+                <div className="space-y-1">
+                    <label className="text-[9px] uppercase font-bold text-dark/60 block">SK Charge Overtime Durasi Acara *</label>
+                    <textarea 
+                        value={settings.sk_charge_overtime || ''}
+                        onChange={(e) => handleSettingChange('sk_charge_overtime', e.target.value)}
+                        required
+                        rows={3}
+                        className="w-full p-3 bg-rose/5 border border-rose/20 focus:outline-none focus:border-gold font-sans text-xs leading-relaxed"
                     />
                 </div>
 

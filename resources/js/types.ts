@@ -50,6 +50,7 @@ export interface Quotation {
     total_estimate: number;
     customer_name: string;
     customer_phone: string;
+    customer_address: string | null;
     customer_email: string | null;
     notes: string | null;
     source: 'web' | 'whatsapp' | 'manual';
@@ -79,6 +80,7 @@ export interface Package {
     max_pax: number | null;
     thumbnail: string | null;
     is_active: boolean;
+    is_flat: boolean;
     menu_items: WeddingService[];
     pricing_tiers: PricingTier[];
     category?: Category;

@@ -23,6 +23,7 @@ export const PackagesPanel: React.FC<{ user: User }> = ({ user }) => {
         min_pax: '250',
         max_pax: '',
         is_active: true,
+        is_flat: false,
         service_ids: [] as number[],
         thumbnail: ''
     });
@@ -96,6 +97,7 @@ export const PackagesPanel: React.FC<{ user: User }> = ({ user }) => {
                     min_pax: '250',
                     max_pax: '',
                     is_active: true,
+                    is_flat: false,
                     service_ids: [],
                     thumbnail: ''
                 });
@@ -317,7 +319,7 @@ export const PackagesPanel: React.FC<{ user: User }> = ({ user }) => {
                                 <tr key={pkg.id}>
                                     <td className="p-4 font-bold">{pkg.name}</td>
                                     <td className="p-4">{(pkg as any).category?.name}</td>
-                                    <td className="p-4 font-utility font-bold text-gold">Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}</td>
+                                    <td className="p-4 font-utility font-bold text-gold">Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')} {pkg.is_flat ? '(Flat)' : '/pax'}</td>
                                     <td className="p-4 font-utility">{pkg.min_pax} - {pkg.max_pax || '∞'}</td>
                                     <td className="p-4">
                                         <span className={`px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider border ${pkg.is_active ? 'bg-rose/10 border-rose text-rose' : 'bg-gray-100 text-gray-400'}`}>
@@ -337,6 +339,7 @@ export const PackagesPanel: React.FC<{ user: User }> = ({ user }) => {
                                                         min_pax: pkg.min_pax.toString(),
                                                         max_pax: pkg.max_pax ? pkg.max_pax.toString() : '',
                                                         is_active: pkg.is_active,
+                                                        is_flat: pkg.is_flat || false,
                                                         service_ids: (pkg as any).menu_items.map((m: any) => m.id),
                                                         thumbnail: (pkg as any).thumbnail || ''
                                                     });
@@ -568,15 +571,27 @@ export const PackagesPanel: React.FC<{ user: User }> = ({ user }) => {
                             </div>
 
                             <div className="flex justify-between items-center pt-4">
-                                <label className="flex items-center gap-2 cursor-pointer font-bold text-[9px] uppercase text-dark/60">
-                                    <input 
-                                        type="checkbox" 
-                                        checked={pkgForm.is_active} 
-                                        onChange={(e) => setPkgForm(prev => ({ ...prev, is_active: e.target.checked }))}
-                                        className="accent-gold"
-                                    />
-                                    Publish (Aktif)
-                                </label>
+                                <div className="flex gap-4">
+                                    <label className="flex items-center gap-2 cursor-pointer font-bold text-[9px] uppercase text-dark/60">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={pkgForm.is_active} 
+                                            onChange={(e) => setPkgForm(prev => ({ ...prev, is_active: e.target.checked }))}
+                                            className="accent-gold"
+                                        />
+                                        Publish (Aktif)
+                                    </label>
+                                    
+                                    <label className="flex items-center gap-2 cursor-pointer font-bold text-[9px] uppercase text-dark/60">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={pkgForm.is_flat} 
+                                            onChange={(e) => setPkgForm(prev => ({ ...prev, is_flat: e.target.checked }))}
+                                            className="accent-gold"
+                                        />
+                                        Tarif Flat (WO Crew)
+                                    </label>
+                                </div>
                                 
                                 <div className="flex gap-2">
                                     <button 

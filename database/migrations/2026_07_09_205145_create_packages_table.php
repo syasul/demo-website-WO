@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('max_pax')->nullable();
             $table->string('thumbnail')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_flat')->default(false);
             $table->timestamps();
         });
     }

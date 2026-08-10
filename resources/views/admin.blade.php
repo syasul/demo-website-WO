@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Amaryllis Wedding Admin — Panel Manajemen Pernikahan</title>
+    <title>LUXURY Wedding Admin — Panel Manajemen Pernikahan</title>
     <link rel="icon" type="image/png" href="/favicon.png?v=3">
     <link rel="shortcut icon" href="/favicon.png?v=3">
     

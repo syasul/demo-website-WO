@@ -125,9 +125,9 @@ const AdminApp: React.FC = () => {
                 >
                     <div className="bg-white p-8 md:p-10 shadow-xl rounded-2xl border border-gray-100">
                         <div className="text-center mb-8">
-                            <img src="/logo.png?v=3" className="h-16 w-auto object-contain mx-auto mb-4" alt="Amaryllis Wedding & Organizer Logo" />
+                            <img src="/logo.png?v=4" className="h-16 w-auto object-contain mx-auto mb-4" alt="LUXURY Wedding Organizer Logo" />
                             <h2 className="font-display text-2xl font-bold text-gray-800 uppercase tracking-widest">ADMIN PORTAL</h2>
-                            <p className="text-xs font-utility text-gray-500 mt-2">Amaryllis Wedding CRM</p>
+                            <p className="text-xs font-utility text-gray-500 mt-2">LUXURY Wedding CRM</p>
                         </div>
 
                         <form onSubmit={handleLogin} className="space-y-5">
@@ -139,7 +139,7 @@ const AdminApp: React.FC = () => {
                                     onChange={(e) => setLoginEmail(e.target.value)}
                                     required
                                     className="w-full p-3 rounded-xl text-sm border border-gray-200 bg-gray-50 text-gray-800 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold"
-                                    placeholder="admin@amarylliswedding.com"
+                                    placeholder="admin@luxurywo.com"
                                 />
                             </div>
                             <div className="space-y-1.5">
@@ -190,7 +190,7 @@ const AdminApp: React.FC = () => {
             <aside className="w-64 bg-white shadow-sm border-r border-gray-200 flex flex-col justify-between shrink-0 font-sans z-20 relative">
                 <div>
                     <div className="p-4 border-b border-gray-100 flex items-center justify-center">
-                        <img src="/logo.png?v=3" className="h-14 w-auto object-contain" alt="Amaryllis Wedding Logo" />
+                        <img src="/logo.png?v=4" className="h-14 w-auto object-contain" alt="LUXURY Wedding Logo" />
                     </div>
 
                     <div className="p-5 border-b border-gray-100 text-xs font-utility text-gray-600 flex items-center gap-3">

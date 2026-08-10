@@ -426,7 +426,14 @@ export const LeadsPanel: React.FC<{ user: User }> = ({ user }) => {
                                     </div>
                                 </div>
                                 <div className="col-span-2 space-y-1">
-                                    <span className="text-[9px] font-bold text-dark/40 block uppercase">Lokasi Acara</span>
+                                    <span className="text-[9px] font-bold text-dark/40 block uppercase">Alamat Pelanggan</span>
+                                    <div className="flex items-center gap-1.5 font-medium text-dark">
+                                        <MapPin size={14} className="text-gold" />
+                                        <span>{activeLead.customer_address || '-'}</span>
+                                    </div>
+                                </div>
+                                <div className="col-span-2 space-y-1">
+                                    <span className="text-[9px] font-bold text-dark/40 block uppercase">Tempat / Lokasi Acara</span>
                                     <div className="flex items-center gap-1.5 font-medium text-dark">
                                         <MapPin size={14} className="text-gold" />
                                         <span>{activeLead.event_location || '-'}</span>

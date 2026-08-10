@@ -21,6 +21,8 @@ class AdminSettingController extends Controller
             'contact_address' => 'required|string',
             'whatsapp_template' => 'required|string',
             'notification_emails' => 'nullable|string',
+            'sk_charge_quota' => 'required|string',
+            'sk_charge_overtime' => 'required|string',
         ]);
 
         foreach ($validated as $key => $value) {

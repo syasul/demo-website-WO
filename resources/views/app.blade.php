@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Amaryllis Wedding & Organizer — Mewujudkan Pernikahan Impian Anda</title>
-    <meta name="description" content="Rencanakan pernikahan impian Anda bersama Amaryllis Wedding & Organizer. Paket all-in, dekorasi, rias, dokumentasi, dan venue spesial untuk hari bahagia Anda.">
+    <title>LUXURY Wedding Organizer — Mewujudkan Pernikahan Impian Anda</title>
+    <meta name="description" content="Rencanakan pernikahan impian Anda bersama LUXURY Wedding Organizer. Paket all-in, dekorasi, rias, dokumentasi, dan venue spesial untuk hari bahagia Anda.">
     <link rel="icon" type="image/png" href="/favicon.png?v=3">
     <link rel="shortcut icon" href="/favicon.png?v=3">
     

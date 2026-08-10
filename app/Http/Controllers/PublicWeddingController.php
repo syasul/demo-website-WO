@@ -83,7 +83,7 @@ class PublicWeddingController extends Controller
             ], 422);
         }
 
-        $packageSubtotal = $package->price_per_pax * $pax;
+        $packageSubtotal = $package->is_flat ? $package->price_per_pax : $package->price_per_pax * $pax;
         $addonSubtotal = 0;
         $addonBreakdown = [];
         $addonIds = $validated['addon_ids'] ?? [];
@@ -155,6 +155,7 @@ class PublicWeddingController extends Controller
             'event_location' => 'nullable|string',
             'customer_name' => 'required|string|max:255',
             'customer_phone' => 'required|string|max:50',
+            'customer_address' => 'required|string|max:500',
             'customer_email' => 'nullable|email|max:255',
             'notes' => 'nullable|string',
         ]);
@@ -173,7 +174,7 @@ class PublicWeddingController extends Controller
             ], 422);
         }
 
-        $packageSubtotal = $package->price_per_pax * $pax;
+        $packageSubtotal = $package->is_flat ? $package->price_per_pax : $package->price_per_pax * $pax;
 
         $addonSubtotal = 0;
         $addonSnapshot = [];
@@ -198,21 +199,23 @@ class PublicWeddingController extends Controller
         $subtotal = $packageSubtotal + $addonSubtotal;
 
         $discountPercent = 0;
-        $packageTier = PricingTier::where('package_id', $package->id)
-            ->where('min_pax', '<=', $pax)
-            ->orderBy('min_pax', 'desc')
-            ->first();
-
-        if ($packageTier) {
-            $discountPercent = $packageTier->discount_percent;
-        } else {
-            $globalTier = PricingTier::whereNull('package_id')
+        if (!$package->is_flat) {
+            $packageTier = PricingTier::where('package_id', $package->id)
                 ->where('min_pax', '<=', $pax)
                 ->orderBy('min_pax', 'desc')
                 ->first();
 
-            if ($globalTier) {
-                $discountPercent = $globalTier->discount_percent;
+            if ($packageTier) {
+                $discountPercent = $packageTier->discount_percent;
+            } else {
+                $globalTier = PricingTier::whereNull('package_id')
+                    ->where('min_pax', '<=', $pax)
+                    ->orderBy('min_pax', 'desc')
+                    ->first();
+
+                if ($globalTier) {
+                    $discountPercent = $globalTier->discount_percent;
+                }
             }
         }
 
@@ -237,6 +240,7 @@ class PublicWeddingController extends Controller
             'total_estimate' => $totalEstimate,
             'customer_name' => $validated['customer_name'],
             'customer_phone' => $validated['customer_phone'],
+            'customer_address' => $validated['customer_address'],
             'customer_email' => $validated['customer_email'] ?? null,
             'notes' => $validated['notes'] ?? null,
             'source' => 'web',
@@ -245,8 +249,8 @@ class PublicWeddingController extends Controller
             'lost_reason' => null,
         ]);
 
-        $waNumber = Setting::getByKey('contact_whatsapp', '6281234567890');
-        $waTemplate = Setting::getByKey('whatsapp_template', "Halo Admin Amaryllis Wedding, saya ingin mengkonfirmasi permintaan reservasi wedding saya:\n\n*Nama:* {name}\n*Paket:* {package}\n*Total:* Rp {total_estimate}");
+        $waNumber = Setting::getByKey('contact_whatsapp', '6285647457018');
+        $waTemplate = Setting::getByKey('whatsapp_template', "Halo Admin LUXURY Wedding Organizer, saya ingin mengkonfirmasi permintaan reservasi wedding saya:\n\n*Nama:* {name}\n*Paket:* {package}\n*Total:* Rp {total_estimate}");
 
         $addonsText = 'Tidak ada';
         if (!empty($addonSnapshot)) {
@@ -256,6 +260,7 @@ class PublicWeddingController extends Controller
         $replacements = [
             '{name}' => $quotation->customer_name,
             '{phone}' => $quotation->customer_phone,
+            '{address}' => $quotation->customer_address,
             '{package}' => $quotation->package_name_snapshot,
             '{pax}' => $quotation->pax,
             '{event_date}' => Carbon::parse($quotation->event_date)->format('d-m-Y'),
@@ -299,5 +304,12 @@ class PublicWeddingController extends Controller
             'message' => 'Pesan Anda berhasil terkirim. Tim wedding planner kami akan segera menghubungi Anda.',
             'contact' => $contact
         ], 201);
+    }
+
+    public function getPublicSettings()
+    {
+        $keys = ['contact_whatsapp', 'contact_email', 'contact_address', 'sk_charge_quota', 'sk_charge_overtime'];
+        $settings = Setting::whereIn('key', $keys)->get()->pluck('value', 'key');
+        return response()->json($settings);
     }
 }

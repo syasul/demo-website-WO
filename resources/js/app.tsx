@@ -11,6 +11,7 @@ import { PackageDetails } from './pages/PackageDetails';
 import { GalleryGrid } from './pages/GalleryGrid';
 import { AboutUs } from './pages/AboutUs';
 import { ContactUs } from './pages/ContactUs';
+import { Booking } from './pages/Booking';
 import { GlassButton } from './components/GlassButton';
 
 // ── Navbar item helper
@@ -69,6 +70,7 @@ const Navbar: React.FC = () => {
     const navLinks = [
         { to: '/', label: 'Beranda' },
         { to: '/paket', label: 'Paket Pernikahan' },
+        { to: '/reservasi', label: 'Reservasi' },
         { to: '/galeri', label: 'Galeri' },
         { to: '/tentang-kami', label: 'Tentang Kami' },
         { to: '/kontak', label: 'Kontak' },
@@ -84,11 +86,11 @@ const Navbar: React.FC = () => {
                     }`}
             >
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-3 group shrink-0 -my-3 sm:-my-4 md:-my-5 lg:-my-6">
+                <Link to="/" className="flex items-center gap-3 group shrink-0">
                     <img
-                        src="/logo.png?v=3"
-                        className="h-18 sm:h-20 md:h-24 lg:h-28 w-auto object-contain transition-all duration-500 group-hover:scale-105"
-                        alt="Amaryllis Wedding & Organizer Logo"
+                        src="/logo.png?v=4"
+                        className="h-12 sm:h-14 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+                        alt="LUXURY Wedding Organizer Logo"
                     />
                 </Link>
 
@@ -101,9 +103,9 @@ const Navbar: React.FC = () => {
 
                 {/* CTA + Hamburger */}
                 <div className="flex items-center gap-2.5 shrink-0">
-                    <Link to="/kontak" className="hidden md:block">
+                    <Link to="/reservasi" className="hidden md:block">
                         <GlassButton variant="primary" size="sm" className="px-5 py-2.5">
-                            Konsultasi Gratis
+                            Booking Sekarang
                             <ArrowRight size={13} />
                         </GlassButton>
                     </Link>
@@ -140,9 +142,9 @@ const Navbar: React.FC = () => {
                                     {l.label}
                                 </Link>
                             ))}
-                            <Link to="/kontak" onClick={() => setMobileOpen(false)} className="mt-1.5 px-3 pb-1">
+                            <Link to="/reservasi" onClick={() => setMobileOpen(false)} className="mt-1.5 px-3 pb-1">
                                 <GlassButton variant="primary" size="md" className="w-full">
-                                    Konsultasi Gratis
+                                    Booking Sekarang
                                     <ArrowRight size={14} />
                                 </GlassButton>
                             </Link>
@@ -190,17 +192,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div>
                         <img
-                            src="/logo.png?v=3"
-                            alt="Amaryllis Wedding & Organizer"
-                            className="h-36 w-auto -my-6 transition-transform duration-300 hover:scale-105"
+                            src="/logo.png?v=4"
+                            alt="LUXURY Wedding & Organizer"
+                            className="h-20 w-auto transition-transform duration-300 hover:scale-105 mb-2"
                         />
                         <h3 className="font-display text-xl font-bold mb-3">
-                            <span className="text-gradient-gold">Amaryllis</span>{' '}
+                            <span className="text-gradient-gold">LUXURY</span>{' '}
                             <span className="text-rose">Wedding</span>
                         </h3>
                         <p className="text-sm text-dark/55 leading-relaxed">
                             Mewujudkan pernikahan impian Anda dengan layanan wedding organizer profesional.
-                            Dari dekorasi, rias, dokumentasi, hingga katering — semua dalam satu paket.
+                            Dari koordinasi rundown, layout venue, hingga tim pendampingan crew — semua dalam satu paket.
                         </p>
                     </div>
                     <div>
@@ -208,15 +210,15 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         <ul className="text-sm text-dark/55 space-y-2.5">
                             <li className="flex items-center gap-2.5">
                                 <Phone size={13} className="text-rose/70 shrink-0" />
-                                <span>+62 812-3456-7890</span>
+                                <span>+62 856-4745-7018</span>
                             </li>
                             <li className="flex items-center gap-2.5">
                                 <Mail size={13} className="text-rose/70 shrink-0" />
-                                <span>info@amarylliswedding.com</span>
+                                <span>info@luxurywo.com</span>
                             </li>
                             <li className="flex items-start gap-2.5">
                                 <MapPin size={13} className="text-rose/70 shrink-0 mt-0.5" />
-                                <span>Jl. Kebun Raya No. 10, Bogor, Jawa Barat</span>
+                                <span>Ruko Dinoyo Kav. 4, Malang, Jawa Timur</span>
                             </li>
                         </ul>
                     </div>
@@ -236,7 +238,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
                 <div className="border-t border-rose/10 mt-10 pt-6 text-center text-xs text-dark/30 flex items-center justify-center gap-1">
                     <Heart size={12} className="text-rose/50" />
-                    © {new Date().getFullYear()} Amaryllis Wedding & Organizer. All rights reserved.
+                    © {new Date().getFullYear()} LUXURY Wedding Organizer. All rights reserved.
                     <Heart size={12} className="text-rose/50" />
                 </div>
             </footer>
@@ -251,6 +253,7 @@ const AppRoutes: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/paket" element={<PackagesCatalog />} />
             <Route path="/paket/:slug" element={<PackageDetails />} />
+            <Route path="/reservasi" element={<Booking />} />
             <Route path="/galeri" element={<GalleryGrid />} />
             <Route path="/tentang-kami" element={<AboutUs />} />
             <Route path="/kontak" element={<ContactUs />} />

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('total_estimate', 12, 2);
             $table->string('customer_name');
             $table->string('customer_phone');
+            $table->string('customer_address')->nullable();
             $table->string('customer_email')->nullable();
             $table->text('notes')->nullable();
             $table->string('source')->default('web'); // web, whatsapp, manual

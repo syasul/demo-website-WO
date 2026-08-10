@@ -23,6 +23,7 @@ class Quotation extends Model
         'total_estimate',
         'customer_name',
         'customer_phone',
+        'customer_address',
         'customer_email',
         'notes',
         'source',

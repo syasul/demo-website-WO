@@ -21,6 +21,7 @@ Route::post('quotations', [PublicWeddingController::class, 'createQuotation']);
 Route::get('testimonials', [PublicWeddingController::class, 'testimonials']);
 Route::get('galleries', [PublicWeddingController::class, 'galleries']);
 Route::post('contact', [PublicWeddingController::class, 'contactSubmit']);
+Route::get('settings', [PublicWeddingController::class, 'getPublicSettings']);
 
 // Authentication Endpoints
 Route::prefix('auth')->group(function () {

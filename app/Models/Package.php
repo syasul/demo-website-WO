@@ -19,6 +19,7 @@ class Package extends Model
         'max_pax',
         'thumbnail',
         'is_active',
+        'is_flat',
     ];
 
     protected $casts = [
@@ -26,6 +27,7 @@ class Package extends Model
         'min_pax' => 'integer',
         'max_pax' => 'integer',
         'is_active' => 'boolean',
+        'is_flat' => 'boolean',
     ];
 
     public function category()

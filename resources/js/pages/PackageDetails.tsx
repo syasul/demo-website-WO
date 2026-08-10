@@ -524,7 +524,7 @@ export const PackageDetails: React.FC = () => {
                                             </div>
                                         )}
 
-                                        <div className="pt-4 border-t border-rose/15 flex justify-between items-end relative overflow-hidden">
+                                        <div className="pt-4 border-t border-rose/15 flex justify-between items-end relative">
                                             <div>
                                                 <p className="text-[9px] text-dark/35 uppercase font-bold tracking-widest font-utility">Total Estimasi</p>
                                                 <p className="text-xl font-bold font-utility text-rose mt-1 tracking-tight leading-none">

@@ -171,7 +171,7 @@ export const Home: React.FC = () => {
                             transition={{ delay: 0.1 }}
                             className="inline-block text-xs uppercase tracking-[0.2em] text-rose font-semibold font-utility mb-4 px-4 py-1.5 rounded-full bg-white/60 border border-rose/20"
                         >
-                            Amaryllis Wedding & Organizer
+                            LUXURY Wedding Organizer
                         </motion.span>
 
                         <h1 className="anime-hero-title opacity-0 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-dark leading-[1.1] mb-6">
