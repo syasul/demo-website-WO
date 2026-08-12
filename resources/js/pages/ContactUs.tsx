@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle2, Heart, Phone, Mail, MapPin, Sparkles } from 'lucide-react';
 import { GlassCard } from '../components/GlassCard';
@@ -9,6 +9,21 @@ export const ContactUs: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [settings, setSettings] = useState<Record<string, string>>({});
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await fetch('/api/settings');
+                if (res.ok) {
+                    setSettings(await res.json());
+                }
+            } catch (err) {
+                console.error("Failed to fetch settings in ContactUs:", err);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const validate = () => {
         const e: Record<string, string> = {};
@@ -174,7 +189,11 @@ export const ContactUs: React.FC = () => {
                                                 </div>
                                                 <div>
                                                     <p className="text-xs font-semibold text-dark">WhatsApp</p>
-                                                    <p className="text-sm text-dark/60">+62 812-3456-7890</p>
+                                                    <p className="text-sm text-dark/60">
+                                                        {settings.contact_whatsapp
+                                                            ? `+${settings.contact_whatsapp.replace(/(\d{2})(\d{3})(\d{4})(\d+)/, '$1 $2-$3-$4')}`
+                                                            : '+62 856-4745-7018'}
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start gap-4">
@@ -183,7 +202,7 @@ export const ContactUs: React.FC = () => {
                                                 </div>
                                                 <div>
                                                     <p className="text-xs font-semibold text-dark">Email</p>
-                                                    <p className="text-sm text-dark/60">info@amarylliswedding.com</p>
+                                                    <p className="text-sm text-dark/60">{settings.contact_email || 'info@luxurywo.com'}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start gap-4">
@@ -192,7 +211,7 @@ export const ContactUs: React.FC = () => {
                                                 </div>
                                                 <div>
                                                     <p className="text-xs font-semibold text-dark">Alamat</p>
-                                                    <p className="text-sm text-dark/60">Jl. Kebun Raya No. 10, Bogor, Jawa Barat</p>
+                                                    <p className="text-sm text-dark/60">{settings.contact_address || 'Ruko Dinoyo Kav. 4, Malang, Jawa Timur'}</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -73,7 +73,8 @@ class CateringCalculatorTest extends TestCase
             'pax' => 150, // Less than package minimum of 200
             'event_date' => now()->addMonths(1)->toDateString(),
             'customer_name' => 'Test Guest',
-            'customer_phone' => '08123456789'
+            'customer_phone' => '08123456789',
+            'customer_address' => 'Test Address'
         ]);
 
         $response->assertStatus(422);
@@ -91,7 +92,8 @@ class CateringCalculatorTest extends TestCase
             'pax' => 200,
             'event_date' => now()->addMonths(1)->toDateString(),
             'customer_name' => 'Test Guest',
-            'customer_phone' => '08123456789'
+            'customer_phone' => '08123456789',
+            'customer_address' => 'Test Address'
         ]);
 
         $response->assertStatus(201);
@@ -121,7 +123,8 @@ class CateringCalculatorTest extends TestCase
             'event_date' => now()->addMonths(1)->toDateString(),
             'customer_name' => 'John Doe',
             'customer_phone' => '08123456789',
-            'customer_email' => 'john@example.com'
+            'customer_email' => 'john@example.com',
+            'customer_address' => 'Test Address'
         ]);
 
         $response->assertStatus(201);

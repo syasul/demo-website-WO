@@ -249,7 +249,7 @@ class PublicWeddingController extends Controller
             'lost_reason' => null,
         ]);
 
-        $waNumber = Setting::getByKey('contact_whatsapp', '6281330012100');
+        $waNumber = Setting::getByKey('contact_whatsapp', '6285647457018');
         $waTemplate = Setting::getByKey('whatsapp_template', "Halo Admin LUXURY Wedding Organizer, saya ingin mengkonfirmasi permintaan reservasi wedding saya:\n\n*Nama:* {name}\n*Paket:* {package}\n*Total:* Rp {total_estimate}");
 
         $addonsText = 'Tidak ada';

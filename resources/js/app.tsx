@@ -160,6 +160,23 @@ const Navbar: React.FC = () => {
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { pathname } = useLocation();
     const isHome = pathname === '/';
+    const [settings, setSettings] = useState<Record<string, string>>({});
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await fetch('/api/settings');
+                if (res.ok) {
+                    setSettings(await res.json());
+                }
+            } catch (err) {
+                console.error("Failed to fetch settings in Layout:", err);
+            }
+        };
+        fetchSettings();
+    }, []);
+
+    const waNumber = settings.contact_whatsapp || '6285647457018';
 
     return (
         <div className="flex flex-col min-h-screen relative overflow-hidden floral-bg">
@@ -173,7 +190,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             {/* WhatsApp Floating Button */}
             <motion.a
-                href="https://wa.me/6281234567890"
+                href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noreferrer"
                 className="wa-pulse fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full text-white shadow-2xl"
@@ -210,15 +227,19 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         <ul className="text-sm text-dark/55 space-y-2.5">
                             <li className="flex items-center gap-2.5">
                                 <Phone size={13} className="text-rose/70 shrink-0" />
-                                <span>+62 856-4745-7018</span>
+                                <span>
+                                    {settings.contact_whatsapp
+                                        ? `+${settings.contact_whatsapp.replace(/(\d{2})(\d{3})(\d{4})(\d+)/, '$1 $2-$3-$4')}`
+                                        : '+62 856-4745-7018'}
+                                </span>
                             </li>
                             <li className="flex items-center gap-2.5">
                                 <Mail size={13} className="text-rose/70 shrink-0" />
-                                <span>info@luxurywo.com</span>
+                                <span>{settings.contact_email || 'info@luxurywo.com'}</span>
                             </li>
                             <li className="flex items-start gap-2.5">
                                 <MapPin size={13} className="text-rose/70 shrink-0 mt-0.5" />
-                                <span>Ruko Dinoyo Kav. 4, Malang, Jawa Timur</span>
+                                <span>{settings.contact_address || 'Ruko Dinoyo Kav. 4, Malang, Jawa Timur'}</span>
                             </li>
                         </ul>
                     </div>
