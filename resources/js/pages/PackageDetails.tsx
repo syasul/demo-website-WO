@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Check, Phone, Heart, ChevronLeft, Users, Tag, Calendar, MapPin, Sparkles } from 'lucide-react';
 import { GlassCard } from '../components/GlassCard';
@@ -49,7 +49,11 @@ const stagger: Variants = {
 
 export const PackageDetails: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
+    const navigate = useNavigate();
+    const location = useLocation();
+    
     const [pkg, setPkg] = useState<Package | null>(null);
+    const [packages, setPackages] = useState<Package[]>([]);
     const [addons, setAddons] = useState<Addon[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -60,22 +64,31 @@ export const PackageDetails: React.FC = () => {
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState<any>(null);
     const [waUrl, setWaUrl] = useState('');
+    const [redirectNotice, setRedirectNotice] = useState('');
 
     const [price, setPrice] = useState({ packageCost: 0, addonsCost: 0, addonBreakdown: [] as any[], subtotal: 0, discountPct: 0, discountAmt: 0, total: 0 });
 
     useEffect(() => {
         (async () => {
             try {
-                const [pkgRes, addonRes] = await Promise.all([
+                const [pkgRes, addonRes, pkgsRes] = await Promise.all([
                     fetch(`/api/packages/${slug}`),
                     fetch('/api/addons'),
+                    fetch('/api/packages'),
                 ]);
                 if (pkgRes.ok) {
                     const d: Package = await pkgRes.json();
                     setPkg(d);
-                    setPax(d.min_pax);
+                    
+                    // Read pax count from navigation state if available
+                    if (location.state?.pax) {
+                        setPax(location.state.pax);
+                    } else {
+                        setPax(d.min_pax);
+                    }
                 }
                 if (addonRes.ok) setAddons(await addonRes.json());
+                if (pkgsRes.ok) setPackages(await pkgsRes.json());
             } catch (e) {
                 console.error(e);
             } finally {
@@ -83,6 +96,16 @@ export const PackageDetails: React.FC = () => {
             }
         })();
     }, [slug]);
+
+    useEffect(() => {
+        if (location.state?.notice) {
+            setRedirectNotice(location.state.notice);
+            // Clean up navigation state so notice doesn't persist
+            window.history.replaceState({}, document.title);
+            const timer = setTimeout(() => setRedirectNotice(''), 6000);
+            return () => clearTimeout(timer);
+        }
+    }, [location.state]);
 
     useEffect(() => {
         if (!pkg) return;
@@ -116,6 +139,26 @@ export const PackageDetails: React.FC = () => {
     const toggleAddon = useCallback((id: number) => {
         setSelectedAddons(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
     }, []);
+
+    const handlePaxChange = (newPax: number) => {
+        setPax(newPax);
+        
+        if (!pkg || packages.length === 0) return;
+        
+        if (pkg.max_pax && newPax > pkg.max_pax) {
+            const sortedPkgs = [...packages].sort((a, b) => (a.max_pax || 0) - (b.max_pax || 0));
+            const nextPkg = sortedPkgs.find(p => p.max_pax && newPax <= p.max_pax);
+            
+            if (nextPkg && nextPkg.slug !== pkg.slug) {
+                navigate(`/paket/${nextPkg.slug}`, {
+                    state: { 
+                        pax: newPax, 
+                        notice: `Paket otomatis dialihkan ke ${nextPkg.name} karena jumlah tamu (${newPax} Pax) melebihi kapasitas ${pkg.name} (Maks ${pkg.max_pax} Pax).` 
+                    }
+                });
+            }
+        }
+    };
 
     const validate = () => {
         const e: Record<string, string> = {};
@@ -270,6 +313,20 @@ export const PackageDetails: React.FC = () => {
                         Rincian Estimasi Biaya
                     </h2>
 
+                    <AnimatePresence>
+                        {redirectNotice && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="bg-gold/10 border border-gold text-dark text-xs p-3.5 rounded-xl flex items-center gap-2 mb-4 overflow-hidden"
+                            >
+                                <Sparkles size={16} className="text-gold animate-bounce shrink-0" />
+                                <span className="font-semibold text-rose-dark">{redirectNotice}</span>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
                         {/* Form side */}
@@ -298,7 +355,8 @@ export const PackageDetails: React.FC = () => {
                                             value={pax === 0 ? '' : pax}
                                             onChange={e => {
                                                 const val = e.target.value;
-                                                setPax(val === '' ? 0 : Number(val));
+                                                const newPax = val === '' ? 0 : Number(val);
+                                                handlePaxChange(newPax);
                                             }}
                                             className="glass-input px-3.5 py-2.5 w-full text-sm font-utility"
                                             placeholder={`Masukkan jumlah tamu (Maksimal ${pkg.max_pax || 2000} Pax)...`}

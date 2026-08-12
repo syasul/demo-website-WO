@@ -50,6 +50,7 @@ export const Booking: React.FC = () => {
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState<any>(null);
     const [waUrl, setWaUrl] = useState('');
+    const [redirectNotice, setRedirectNotice] = useState('');
 
     const [price, setPrice] = useState({
         packageCost: 0,
@@ -125,6 +126,26 @@ export const Booking: React.FC = () => {
     const toggleAddon = useCallback((id: number) => {
         setSelectedAddons(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
     }, []);
+
+    const handlePaxChange = (newPax: number) => {
+        setPax(newPax);
+        
+        if (!selectedPackageId) return;
+        
+        const currentPkg = packages.find(p => p.id === selectedPackageId);
+        if (!currentPkg) return;
+        
+        if (currentPkg.max_pax && newPax > currentPkg.max_pax) {
+            const sortedPkgs = [...packages].sort((a, b) => (a.max_pax || 0) - (b.max_pax || 0));
+            const nextPkg = sortedPkgs.find(p => p.max_pax && newPax <= p.max_pax);
+            
+            if (nextPkg && nextPkg.id !== selectedPackageId) {
+                setSelectedPackageId(nextPkg.id);
+                setRedirectNotice(`Paket otomatis dialihkan ke ${nextPkg.name} karena jumlah tamu (${newPax} Pax) melebihi kapasitas ${currentPkg.name} (Maks ${currentPkg.max_pax} Pax).`);
+                setTimeout(() => setRedirectNotice(''), 6000);
+            }
+        }
+    };
 
     const validate = () => {
         const e: Record<string, string> = {};
@@ -213,6 +234,20 @@ export const Booking: React.FC = () => {
                                 <h3 className="font-display text-lg font-bold text-dark border-b border-rose/10 pb-3 uppercase tracking-wider">
                                     Informasi Reservasi Pernikahan
                                 </h3>
+
+                                <AnimatePresence>
+                                    {redirectNotice && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="bg-gold/10 border border-gold text-dark text-xs p-3.5 rounded-xl flex items-center gap-2 mb-4 overflow-hidden"
+                                        >
+                                            <Sparkles size={16} className="text-gold animate-bounce shrink-0" />
+                                            <span className="font-semibold text-rose-dark">{redirectNotice}</span>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     {/* Package Dropdown */}
@@ -417,7 +452,8 @@ export const Booking: React.FC = () => {
                                                     value={pax === 0 ? '' : pax}
                                                     onChange={e => {
                                                         const val = e.target.value;
-                                                        setPax(val === '' ? 0 : Number(val));
+                                                        const newPax = val === '' ? 0 : Number(val);
+                                                        handlePaxChange(newPax);
                                                     }}
                                                     className="glass-input px-3.5 py-2.5 w-full text-xs font-utility"
                                                     placeholder={`Masukkan jumlah tamu (Maksimal ${selectedPackage.max_pax || 2000} Pax)...`}
