@@ -4,6 +4,7 @@ import { Check, Phone, Heart, Users, Calendar, MapPin, Sparkles, Home, Mail, Shi
 import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 import type { Package, Addon } from '../types';
+import { getCapacityText } from '../types';
 
 const AnimNum: React.FC<{ value: number }> = ({ value }) => {
     const [display, setDisplay] = useState(value);
@@ -225,7 +226,7 @@ export const Booking: React.FC = () => {
                                             <option value="">-- Pilih Paket Pernikahan --</option>
                                             {packages.map(p => (
                                                 <option key={p.id} value={p.id}>
-                                                    {p.name} — Rp {Number(p.price_per_pax).toLocaleString('id-ID')} {p.is_flat ? '(WO Flat Fee)' : '/pax'}
+                                                    {p.name} — Rp {Number(p.price_per_pax).toLocaleString('id-ID')} {p.is_flat ? '(Harga Flat Paket)' : '/pax'}
                                                 </option>
                                             ))}
                                         </select>
@@ -393,26 +394,45 @@ export const Booking: React.FC = () => {
                                         </div>
                                     )}
 
-                                    {/* Pax count slider (displayed if package is NOT flat, or if showing capacity range info) */}
+                                    {/* Pax Selector */}
                                     {selectedPackage && (
                                         <div className="space-y-3 pt-2 border-t border-rose/10">
                                             <div className="flex justify-between items-center text-xs">
-                                                <span className="font-bold text-dark/50 uppercase font-utility">Jumlah Tamu Undangan</span>
+                                                <span className="font-bold text-dark/50 uppercase font-utility">Estimasi Jumlah Tamu</span>
                                                 <span className="font-bold text-rose bg-rose/10 px-2 py-0.5 font-utility">{pax} Tamu</span>
                                             </div>
-                                            <input
-                                                type="range"
-                                                min={selectedPackage.min_pax}
-                                                max={selectedPackage.max_pax || 2000}
-                                                step={25}
-                                                value={pax}
-                                                onChange={e => setPax(Number(e.target.value))}
-                                                className="w-full"
-                                            />
-                                            <div className="flex justify-between text-[9px] text-dark/30 font-utility">
-                                                <span>Min {selectedPackage.min_pax} Tamu</span>
-                                                <span>Max {selectedPackage.max_pax || 2000} Tamu</span>
+
+                                            <div className="text-[10px] text-dark/65 bg-rose/5 border border-rose/10 p-3 rounded-lg">
+                                                <span className="font-bold text-rose">Kapasitas Paket:</span> {getCapacityText(selectedPackage)}
                                             </div>
+
+                                            <div className="space-y-1">
+                                                <label className="text-[10px] uppercase text-dark/50 font-utility tracking-widest block font-bold">
+                                                    Jumlah Tamu (Pax) *
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    min={selectedPackage.is_flat ? 1 : selectedPackage.min_pax}
+                                                    max={selectedPackage.max_pax || 2000}
+                                                    value={pax === 0 ? '' : pax}
+                                                    onChange={e => {
+                                                        const val = e.target.value;
+                                                        setPax(val === '' ? 0 : Number(val));
+                                                    }}
+                                                    className="glass-input px-3.5 py-2.5 w-full text-xs font-utility"
+                                                    placeholder={`Masukkan jumlah tamu (Maksimal ${selectedPackage.max_pax || 2000} Pax)...`}
+                                                />
+                                                <p className="text-[9px] text-dark/40 italic">
+                                                    Estimasi Undangan: {Math.round(pax / 2)} Undangan
+                                                </p>
+                                            </div>
+
+                                            {selectedPackage.max_pax && pax > selectedPackage.max_pax && (
+                                                <div className="text-[10px] text-amber-600 bg-amber-50 border border-amber-200/50 p-2.5 rounded-lg font-medium leading-relaxed">
+                                                    Perhatian: Jumlah tamu melebihi kapasitas paket ({selectedPackage.max_pax} Pax).
+                                                    Kelebihan tamu akan dikenakan biaya tambahan (charge) sesuai Syarat & Ketentuan.
+                                                </div>
+                                            )}
                                         </div>
                                     )}
 

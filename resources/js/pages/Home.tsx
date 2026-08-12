@@ -11,6 +11,7 @@ import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 
 import type { Category, Testimonial } from '../types';
+import { getCapacityText } from '../types';
 
 export const getPackageThumbnail = (slug: string): string => {
     const map: Record<string, string> = {
@@ -437,6 +438,11 @@ export const Home: React.FC = () => {
                                             <p className="text-dark/45 text-xs mt-1.5 leading-relaxed line-clamp-2">{pkg.description}</p>
                                         </div>
 
+                                        <div className="flex justify-between items-center text-[10px] text-dark/35 font-utility uppercase tracking-wider border-b border-rose/5 pb-2">
+                                            <span>Kapasitas</span>
+                                            <span className="font-bold text-dark/60">{getCapacityText(pkg)}</span>
+                                        </div>
+
                                         {pkg.menu_items.length > 0 && (
                                             <div className="space-y-2">
                                                 <span className="text-[10px] uppercase tracking-widest text-rose/70 font-utility">Layanan Termasuk</span>
@@ -457,10 +463,10 @@ export const Home: React.FC = () => {
 
                                         <div className="mt-auto pt-4 border-t border-rose/10 flex justify-between items-center">
                                             <div>
-                                                <span className="text-[10px] text-dark/35 font-utility uppercase">Mulai dari</span>
+                                                <span className="text-[10px] text-dark/35 font-utility uppercase">{pkg.is_flat ? 'Harga Paket' : 'Mulai dari'}</span>
                                                 <p className="text-rose font-bold font-utility text-base">
                                                     Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}
-                                                    <span className="text-xs font-normal text-dark/35">/pax</span>
+                                                    {!pkg.is_flat && <span className="text-xs font-normal text-dark/35">/pax</span>}
                                                 </p>
                                                 <span className="text-[9px] text-dark/30 font-utility uppercase block"></span>
                                             </div>

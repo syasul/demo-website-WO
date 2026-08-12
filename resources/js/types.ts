@@ -115,3 +115,25 @@ export interface AuditLog {
     after: any;
     created_at: string;
 }
+
+export const getCapacityText = (pkg: { slug: string; min_pax?: number; max_pax?: number | null }) => {
+    const slug = pkg.slug ? pkg.slug.toLowerCase() : '';
+    if (slug.includes('intimate')) {
+        return "75-100 Undangan / 150-200 Pax";
+    }
+    if (slug.includes('classic')) {
+        return "500 Undangan / 1000 Pax";
+    }
+    if (slug.includes('premium')) {
+        return "1000 Undangan / 2000 Pax";
+    }
+    // Fallback
+    const maxUndangan = pkg.max_pax ? Math.round(pkg.max_pax / 2) : 0;
+    if (pkg.min_pax && pkg.max_pax && pkg.min_pax !== pkg.max_pax && pkg.min_pax > 1) {
+        const minUndangan = Math.round(pkg.min_pax / 2);
+        return `${minUndangan}-${maxUndangan} Undangan / ${pkg.min_pax}-${pkg.max_pax} Pax`;
+    }
+    return pkg.max_pax 
+        ? `Maksimal ${maxUndangan} Undangan / ${pkg.max_pax} Pax` 
+        : `Minimum ${pkg.min_pax} Pax`;
+};

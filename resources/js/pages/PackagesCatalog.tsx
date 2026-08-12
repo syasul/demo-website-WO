@@ -6,6 +6,7 @@ import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 import { getPackageThumbnail } from './Home';
 import type { Category, Package } from '../types';
+import { getCapacityText } from '../types';
 
 const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const fadeUp: Variants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } };
@@ -155,16 +156,16 @@ export const PackagesCatalog: React.FC = () => {
 
                                     <div className="border-t border-rose/10 pt-4 space-y-4 mt-auto">
                                         <div className="flex justify-between items-center text-[10px] text-dark/35 font-utility uppercase tracking-wider">
-                                            <span>Min. Tamu</span>
-                                            <span className="font-bold text-dark/60">{pkg.min_pax} Tamu</span>
+                                            <span>Kapasitas</span>
+                                            <span className="font-bold text-dark/60">{getCapacityText(pkg)}</span>
                                         </div>
                                         
                                         <div className="flex items-center justify-between">
                                             <div>
-                                                <p className="text-[9px] text-dark/30 font-utility uppercase">Mulai dari</p>
+                                                <p className="text-[9px] text-dark/30 font-utility uppercase">{pkg.is_flat ? 'Harga Paket' : 'Mulai dari'}</p>
                                                 <p className="text-rose font-bold font-utility text-base leading-none">
                                                     Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}
-                                                    <span className="text-[10px] font-normal text-dark/30">/pax</span>
+                                                    {!pkg.is_flat && <span className="text-[10px] font-normal text-dark/30">/pax</span>}
                                                 </p>
                                                 <p className="text-[8px] text-dark/30 font-utility uppercase mt-1"></p>
                                             </div>

@@ -6,6 +6,7 @@ import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 import { getPackageThumbnail } from './Home';
 import type { Package, Addon } from '../types';
+import { getCapacityText } from '../types';
 
 const AnimNum: React.FC<{ value: number }> = ({ value }) => {
     const [display, setDisplay] = useState(value);
@@ -85,7 +86,9 @@ export const PackageDetails: React.FC = () => {
 
     useEffect(() => {
         if (!pkg) return;
-        const packageCost = Number(pkg.price_per_pax) * pax;
+        const packageCost = pkg.is_flat 
+            ? Number(pkg.price_per_pax) 
+            : Number(pkg.price_per_pax) * pax;
         let addonsCost = 0;
         const addonBreakdown: any[] = [];
         selectedAddons.forEach(id => {
@@ -205,23 +208,25 @@ export const PackageDetails: React.FC = () => {
                             <h1 className="font-display text-2xl md:text-3xl font-bold text-dark mb-3">{pkg.name}</h1>
                             <div className="h-px w-16 bg-rose/50 mb-4" />
                             <p className="text-dark/55 text-sm leading-relaxed mb-6">{pkg.description}</p>
-                            <div className="grid grid-cols-3 gap-4 text-sm font-utility">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-utility">
                                 <div>
-                                    <p className="text-[10px] text-dark/30 uppercase mb-1">Harga per Orang</p>
-                                    <p className="text-rose font-bold">Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}</p>
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-dark/30 uppercase mb-1">Min. Tamu</p>
-                                    <p className="text-dark font-semibold">{pkg.min_pax} Tamu</p>
+                                    <p className="text-[10px] text-dark/30 uppercase mb-1">{pkg.is_flat ? 'Harga Paket (Flat Fee)' : 'Harga per Orang'}</p>
+                                    <p className="text-rose font-bold">
+                                        Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}
+                                        {!pkg.is_flat && <span className="text-xs font-normal text-dark/35">/pax</span>}
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-dark/30 uppercase mb-1">Kapasitas</p>
-                                    <p className="text-dark font-semibold">{pkg.max_pax || '∞'} Tamu</p>
+                                    <p className="text-dark font-semibold">{getCapacityText(pkg)}</p>
                                 </div>
                             </div>
                             <p className="text-[9px] text-dark/35 font-utility uppercase tracking-wider mt-4 flex items-center gap-1.5">
                                 <Check size={10} className="text-rose shrink-0" />
-                                Harga per orang = per tamu, sudah termasuk seluruh layanan paket — bukan hanya katering
+                                {pkg.is_flat 
+                                    ? 'Harga paket flat fee, sudah termasuk seluruh layanan paket sesuai kapasitas maksimum — bukan hitungan per pax'
+                                    : 'Harga per orang = per tamu, sudah termasuk seluruh layanan paket — bukan hanya katering'
+                                }
                             </p>
                         </div>
                     </GlassCard>
@@ -270,34 +275,45 @@ export const PackageDetails: React.FC = () => {
                         {/* Form side */}
                         <div className="lg:col-span-7 space-y-5">
 
-                            {/* Step 1 — Pax Slider */}
+                            {/* Step 1 — Pax Selector */}
                             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
                                 <GlassCard className="p-6 md:p-8 space-y-5">
                                     <div className="flex items-center gap-2">
                                         <Users size={16} className="text-rose" />
-                                        <h3 className="font-semibold text-dark text-sm">Jumlah Tamu Undangan</h3>
+                                        <h3 className="font-semibold text-dark text-sm">Estimasi Jumlah Tamu</h3>
                                     </div>
 
-                                    <div className="glass-card rounded-xl px-6 py-4 text-center">
-                                        <p className="text-[10px] text-dark/30 uppercase font-utility mb-1">Jumlah Tamu</p>
-                                        <motion.p className="text-4xl font-bold font-display text-dark">
-                                            {pax} <span className="text-lg font-normal text-dark/40">Tamu</span>
-                                        </motion.p>
+                                    <div className="text-[11px] text-dark/65 bg-rose/5 border border-rose/10 p-3 rounded-lg">
+                                        <span className="font-bold text-rose">Kapasitas Paket:</span> {getCapacityText(pkg)}
                                     </div>
 
-                                    <input
-                                        type="range"
-                                        min={pkg.min_pax}
-                                        max={pkg.max_pax || 2000}
-                                        step={25}
-                                        value={pax}
-                                        onChange={e => setPax(Number(e.target.value))}
-                                        className="w-full"
-                                    />
-                                    <div className="flex justify-between text-[10px] text-dark/25 font-utility">
-                                        <span>Min {pkg.min_pax} Tamu</span>
-                                        <span>Max {pkg.max_pax || 2000} Tamu</span>
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] uppercase text-dark/40 font-utility tracking-widest block font-bold">
+                                            Jumlah Tamu (Pax) *
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min={pkg.is_flat ? 1 : pkg.min_pax}
+                                            max={pkg.max_pax || 2000}
+                                            value={pax === 0 ? '' : pax}
+                                            onChange={e => {
+                                                const val = e.target.value;
+                                                setPax(val === '' ? 0 : Number(val));
+                                            }}
+                                            className="glass-input px-3.5 py-2.5 w-full text-sm font-utility"
+                                            placeholder={`Masukkan jumlah tamu (Maksimal ${pkg.max_pax || 2000} Pax)...`}
+                                        />
+                                        <p className="text-[9px] text-dark/40 italic">
+                                            Estimasi Undangan: {Math.round(pax / 2)} Undangan
+                                        </p>
                                     </div>
+
+                                    {pkg.max_pax && pax > pkg.max_pax && (
+                                        <div className="text-[10px] text-amber-600 bg-amber-50 border border-amber-200/50 p-2.5 rounded-lg font-medium leading-relaxed">
+                                            Perhatian: Jumlah tamu melebihi kapasitas paket ({pkg.max_pax} Pax).
+                                            Kelebihan tamu akan dikenakan biaya tambahan (charge) sesuai Syarat & Ketentuan.
+                                        </div>
+                                    )}
                                 </GlassCard>
                             </motion.div>
 
@@ -473,7 +489,7 @@ export const PackageDetails: React.FC = () => {
                                                 <span className="font-bold text-dark">Rp <AnimNum value={price.packageCost} /></span>
                                             </div>
                                             <div className="flex justify-between text-[10px] text-dark/45 font-display italic">
-                                                <span>{pax} Tamu x Rp {Number(pkg.price_per_pax).toLocaleString('id-ID')}/pax</span>
+                                                <span>{pkg.is_flat ? 'Tarif Flat Paket Pernikahan' : `${pax} Tamu x Rp ${Number(pkg.price_per_pax).toLocaleString('id-ID')}/pax`}</span>
                                             </div>
                                         </div>
 

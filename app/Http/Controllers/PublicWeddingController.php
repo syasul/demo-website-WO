@@ -72,7 +72,7 @@ class PublicWeddingController extends Controller
         $package = Package::findOrFail($validated['package_id']);
         $pax = $validated['pax'];
 
-        if ($pax < $package->min_pax) {
+        if (!$package->is_flat && $pax < $package->min_pax) {
             return response()->json([
                 'message' => "Jumlah tamu minimum untuk paket ini adalah {$package->min_pax} pax."
             ], 422);
@@ -163,7 +163,7 @@ class PublicWeddingController extends Controller
         $package = Package::findOrFail($validated['package_id']);
         $pax = $validated['pax'];
 
-        if ($pax < $package->min_pax) {
+        if (!$package->is_flat && $pax < $package->min_pax) {
             return response()->json([
                 'message' => "Jumlah tamu minimum untuk paket ini adalah {$package->min_pax} pax."
             ], 422);
