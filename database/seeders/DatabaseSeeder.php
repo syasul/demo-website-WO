@@ -250,7 +250,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 10. Create Default Settings
-        \App\Models\Setting::create(['key' => 'contact_whatsapp', 'value' => '6285647457018']);
+        \App\Models\Setting::create(['key' => 'contact_whatsapp', 'value' => '6281330012100']);
         \App\Models\Setting::create(['key' => 'contact_email', 'value' => 'info@luxurywo.com']);
         \App\Models\Setting::create(['key' => 'contact_address', 'value' => 'Ruko Dinoyo Kav. 4, Malang, Jawa Timur']);
         \App\Models\Setting::create(['key' => 'whatsapp_template', 'value' => "Halo Admin LUXURY Wedding Organizer, saya ingin mengkonfirmasi reservasi booking WO saya:\n\n*Nama:* {name}\n*No HP:* {phone}\n*Alamat:* {address}\n*Paket:* {package} ({pax} pax)\n*Tanggal Acara:* {event_date}\n*Lokasi:* {location}\n*Add-ons:* {addons}\n*Estimasi Total:* Rp {total_estimate}\n\nMohon dibantu untuk kelanjutan pemesanan."]);

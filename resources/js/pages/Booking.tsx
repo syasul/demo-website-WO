@@ -178,6 +178,9 @@ export const Booking: React.FC = () => {
             if (res.ok) {
                 setSubmitted(data.quotation);
                 setWaUrl(data.whatsapp_url ?? '');
+                if (data.whatsapp_url) {
+                    window.location.href = data.whatsapp_url;
+                }
             } else {
                 alert(data.message || 'Terjadi kesalahan.');
             }

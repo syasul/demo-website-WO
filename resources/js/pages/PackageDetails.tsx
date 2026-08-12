@@ -59,7 +59,7 @@ export const PackageDetails: React.FC = () => {
 
     const [pax, setPax] = useState(250);
     const [selectedAddons, setSelectedAddons] = useState<number[]>([]);
-    const [form, setForm] = useState({ customer_name: '', customer_phone: '', customer_email: '', event_date: '', event_location: '', notes: '' });
+    const [form, setForm] = useState({ customer_name: '', customer_phone: '', customer_address: '', customer_email: '', event_date: '', event_location: '', notes: '' });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState<any>(null);
@@ -164,6 +164,7 @@ export const PackageDetails: React.FC = () => {
         const e: Record<string, string> = {};
         if (!form.customer_name.trim()) e.customer_name = 'Nama wajib diisi';
         if (!form.customer_phone.trim()) e.customer_phone = 'No. WhatsApp wajib diisi';
+        if (!form.customer_address.trim()) e.customer_address = 'Alamat lengkap wajib diisi';
         if (!form.event_date) e.event_date = 'Tanggal acara wajib diisi';
         setErrors(e);
         return !Object.keys(e).length;
@@ -183,6 +184,9 @@ export const PackageDetails: React.FC = () => {
             if (res.ok) {
                 setSubmitted(data.quotation);
                 setWaUrl(data.whatsapp_url ?? '');
+                if (data.whatsapp_url) {
+                    window.location.href = data.whatsapp_url;
+                }
             } else {
                 alert(data.message || 'Terjadi kesalahan.');
             }
@@ -485,6 +489,22 @@ export const PackageDetails: React.FC = () => {
                                                     className="glass-input px-3.5 py-2.5 w-full text-sm placeholder-dark/20"
                                                 />
                                             </div>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] uppercase text-dark/40 font-utility tracking-widest block font-bold">Alamat Lengkap Pemesan *</label>
+                                            <input
+                                                type="text"
+                                                name="customer_address"
+                                                value={form.customer_address}
+                                                onChange={e => {
+                                                    setForm(p => ({ ...p, customer_address: e.target.value }));
+                                                    if (errors.customer_address) setErrors(p => { const c = { ...p }; delete c.customer_address; return c; });
+                                                }}
+                                                placeholder="Tulis alamat rumah lengkap Anda..."
+                                                className={`glass-input px-3.5 py-2.5 w-full text-sm placeholder-dark/20 ${errors.customer_address ? 'border-red-500/50' : ''}`}
+                                            />
+                                            {errors.customer_address && <p className="text-[9px] text-red-500">{errors.customer_address}</p>}
                                         </div>
 
                                         <div className="space-y-1">
